@@ -15,9 +15,9 @@
 		F22710DA1D4B2F39007E515A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F22710D81D4B2F39007E515A /* LaunchScreen.storyboard */; };
 		F22710E51D4B2F39007E515A /* JPPDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F22710E41D4B2F39007E515A /* JPPDTests.m */; };
 		F22710F01D4B2F39007E515A /* JPPDUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F22710EF1D4B2F39007E515A /* JPPDUITests.m */; };
-		F22710FF1D4B2F60007E515A /* JPPD.m in Sources */ = {isa = PBXBuildFile; fileRef = F22710FE1D4B2F60007E515A /* JPPD.m */; };
-		F22711021D4EEE9C007E515A /* JPPDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F22711011D4EEE9C007E515A /* JPPDKit.m */; };
-		F22711051D503F62007E515A /* JPPDTableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F22711041D503F62007E515A /* JPPDTableManager.m */; };
+		F260F8621EF39EF900A1131B /* JPPD.m in Sources */ = {isa = PBXBuildFile; fileRef = F260F85F1EF39EF900A1131B /* JPPD.m */; };
+		F260F8631EF39EF900A1131B /* JPPDUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F260F8611EF39EF900A1131B /* JPPDUtils.m */; };
+		F260F8661EF39F1500A1131B /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F260F8651EF39F1500A1131B /* TestObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,13 +54,12 @@
 		F22710EB1D4B2F39007E515A /* JPPDUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JPPDUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F22710EF1D4B2F39007E515A /* JPPDUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JPPDUITests.m; sourceTree = "<group>"; };
 		F22710F11D4B2F39007E515A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F22710FD1D4B2F60007E515A /* JPPD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPPD.h; sourceTree = "<group>"; };
-		F22710FE1D4B2F60007E515A /* JPPD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPPD.m; sourceTree = "<group>"; };
-		F22711001D4EEE9C007E515A /* JPPDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPPDKit.h; sourceTree = "<group>"; };
-		F22711011D4EEE9C007E515A /* JPPDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPPDKit.m; sourceTree = "<group>"; };
-		F22711031D503F62007E515A /* JPPDTableManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPPDTableManager.h; sourceTree = "<group>"; };
-		F22711041D503F62007E515A /* JPPDTableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPPDTableManager.m; sourceTree = "<group>"; };
-		F22711061D505EA5007E515A /* JPPDHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPPDHeader.h; sourceTree = "<group>"; };
+		F260F85E1EF39EF900A1131B /* JPPD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPPD.h; sourceTree = "<group>"; };
+		F260F85F1EF39EF900A1131B /* JPPD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPPD.m; sourceTree = "<group>"; };
+		F260F8601EF39EF900A1131B /* JPPDUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPPDUtils.h; sourceTree = "<group>"; };
+		F260F8611EF39EF900A1131B /* JPPDUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPPDUtils.m; sourceTree = "<group>"; };
+		F260F8641EF39F1500A1131B /* TestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
+		F260F8651EF39F1500A1131B /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +110,11 @@
 		F22710C91D4B2F39007E515A /* JPPD */ = {
 			isa = PBXGroup;
 			children = (
-				F22711091D50699E007E515A /* class */,
+				F260F85D1EF39EF900A1131B /* JPPD */,
 				F22710CD1D4B2F39007E515A /* AppDelegate.h */,
 				F22710CE1D4B2F39007E515A /* AppDelegate.m */,
+				F260F8641EF39F1500A1131B /* TestObject.h */,
+				F260F8651EF39F1500A1131B /* TestObject.m */,
 				F22710D01D4B2F39007E515A /* ViewController.h */,
 				F22710D11D4B2F39007E515A /* ViewController.m */,
 				F22710D31D4B2F39007E515A /* Main.storyboard */,
@@ -151,18 +152,15 @@
 			path = JPPDUITests;
 			sourceTree = "<group>";
 		};
-		F22711091D50699E007E515A /* class */ = {
+		F260F85D1EF39EF900A1131B /* JPPD */ = {
 			isa = PBXGroup;
 			children = (
-				F22710FD1D4B2F60007E515A /* JPPD.h */,
-				F22710FE1D4B2F60007E515A /* JPPD.m */,
-				F22711061D505EA5007E515A /* JPPDHeader.h */,
-				F22711001D4EEE9C007E515A /* JPPDKit.h */,
-				F22711011D4EEE9C007E515A /* JPPDKit.m */,
-				F22711031D503F62007E515A /* JPPDTableManager.h */,
-				F22711041D503F62007E515A /* JPPDTableManager.m */,
+				F260F85E1EF39EF900A1131B /* JPPD.h */,
+				F260F85F1EF39EF900A1131B /* JPPD.m */,
+				F260F8601EF39EF900A1131B /* JPPDUtils.h */,
+				F260F8611EF39EF900A1131B /* JPPDUtils.m */,
 			);
-			name = class;
+			path = JPPD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,11 +225,12 @@
 		F22710BF1D4B2F39007E515A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = JaryPan;
 				TargetAttributes = {
 					F22710C61D4B2F39007E515A = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = FPEBESL49K;
 					};
 					F22710DF1D4B2F39007E515A = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -295,12 +294,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F22711021D4EEE9C007E515A /* JPPDKit.m in Sources */,
+				F260F8631EF39EF900A1131B /* JPPDUtils.m in Sources */,
 				F22710D21D4B2F39007E515A /* ViewController.m in Sources */,
 				F22710CF1D4B2F39007E515A /* AppDelegate.m in Sources */,
 				F22710CC1D4B2F39007E515A /* main.m in Sources */,
-				F22711051D503F62007E515A /* JPPDTableManager.m in Sources */,
-				F22710FF1D4B2F60007E515A /* JPPD.m in Sources */,
+				F260F8661EF39F1500A1131B /* TestObject.m in Sources */,
+				F260F8621EF39EF900A1131B /* JPPD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,8 +368,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -413,8 +414,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -441,11 +444,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FPEBESL49K;
 				INFOPLIST_FILE = JPPD/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JaryPan.JPPD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -453,11 +458,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FPEBESL49K;
 				INFOPLIST_FILE = JPPD/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JaryPan.JPPD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

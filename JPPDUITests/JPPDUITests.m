@@ -1,9 +1,9 @@
 //
-//  JPPDUITests.m
-//  JPPDUITests
+//  main.m
+//  JPPD
 //
-//  Created by ovopark_iOS on 16/7/29.
-//  Copyright © 2016年 JaryPan. All rights reserved.
+//  Created by 潘建磊 on 15/7/29.
+//  Copyright © 2015年 JaryPan. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
