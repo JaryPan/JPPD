@@ -116,9 +116,8 @@ static void mainQueue(void(^block)()) {
         NSString *tablePath = [self pathForTable:table];
         // 判断文件是否存在
         if (![[NSFileManager defaultManager] fileExistsAtPath:tablePath]) {
-            NSError *error = nil;
-            [[NSFileManager defaultManager] createFileAtPath:tablePath contents:nil attributes:nil];
-            if (error) {
+            BOOL success = [[NSFileManager defaultManager] createFileAtPath:tablePath contents:nil attributes:nil];
+            if (!success) {
                 if (completionHandler) {
                     mainQueue(^{
                         completionHandler([JPPDUtils errorWithDomain:@"create table failed" andCode:JPErrorCodeCreateTableFailed]);
@@ -172,9 +171,8 @@ static void mainQueue(void(^block)()) {
         NSString *tablePath = [self pathForTable:table];
         // 判断文件是否存在
         if (![[NSFileManager defaultManager] fileExistsAtPath:tablePath]) {
-            NSError *error = nil;
-            [[NSFileManager defaultManager] createFileAtPath:tablePath contents:nil attributes:nil];
-            if (error) {
+            BOOL success = [[NSFileManager defaultManager] createFileAtPath:tablePath contents:nil attributes:nil];
+            if (!success) {
                 if (completionHandler) {
                     mainQueue(^{
                         completionHandler([JPPDUtils errorWithDomain:@"create table failed" andCode:JPErrorCodeCreateTableFailed]);

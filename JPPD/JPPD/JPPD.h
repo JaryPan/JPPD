@@ -12,20 +12,20 @@
  *可以根据自身需要更改存储主路径
  *对于需要归档的对象类型(包括自定义类和系统的大部分类)，首先要实现NSCoding协议以及对应的方法才能正确存储
  *存储时，对于需要进行归档操作的对象类型，用户不需要自己去处理，存储的过程中会自动判断哪些需要进行归档操作
-  *读取时，对于需要进行反归档操作的对象类型，用户也不需要自己去处理，读取的过程中会自动判断哪些需要进行反归档操作
+ *读取时，对于需要进行反归档操作的对象类型，用户也不需要自己去处理，读取的过程中会自动判断哪些需要进行反归档操作
  *对于集合类，除了NSArray、NSMutableArray、NSDictionary、NSMutableDictionary可以直接装入任意对象类型外，
-   其他的集合类，例如NSSet等，不能在其中装入需要归档的数据，只能装入"基本数据对象类型"
-   例如 [NSSet setWithObject:自定义对象类型] 不能被正确存储和读取
+ 其他的集合类，例如NSSet等，不能在其中装入需要归档的数据，只能装入"基本数据对象类型"
+ 例如 [NSSet setWithObject:自定义对象类型] 不能被正确存储和读取
  *具体使用方法请参考ViewController.m文件中的方法
  *目前系统中不需要进行归档的类（基本数据对象类型）如下：
-                         NSNumber
-                         NSString
-                         NSMutableString
-                         NSArray class
-                         NSMutableArray
-                         NSDictionary
-                         NSMutableDictionary
-                         NSDate
+ NSNumber
+ NSString
+ NSMutableString
+ NSArray class
+ NSMutableArray
+ NSDictionary
+ NSMutableDictionary
+ NSDate
  */
 
 #import <Foundation/Foundation.h>
@@ -43,7 +43,6 @@
 
 /**
  *文件存储目录类型，默认是 JPStorageDirectoryTypeCaches，建议不要更改
- *@param type default is JPStorageDirectoryTypeCaches
  */
 @property (readwrite, assign, nonatomic) JPStorageDirectoryType type;
 
@@ -88,7 +87,7 @@
  *@param keys 获取数据需要的键值数组，该键值数组即为存储时用到的key的数组集合
  *@param table 保存数据的表格
  *@param completionHandler 操作完成之后的block回调，回调会回到主线程，values不为nil(error为nil)时代表读取成功
- *@param unfoundKeys 找不到对应值的key数组集合，unfoundKeys若不为nil，代表存储的表格中没有找到这些key
+ *unfoundKeys 找不到对应值的key数组集合，unfoundKeys若不为nil，代表存储的表格中没有找到这些key
  */
 - (void)valuesForKeys:(nonnull NSArray<NSString *> *)keys inTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(NSDictionary<NSString *, id> * _Nullable values, NSArray<NSString *> * _Nullable unfoundKeys, NSError * _Nullable error))completionHandler;
 
@@ -115,7 +114,7 @@
  *@param keys 被删除的value所对应的key数组
  *@param table 被删除的value所在的表格
  *@param completionHandler 操作完成之后的block回调，回调会回到主线程，error为nil代表删除成功
- *@param unfoundKeys 找不到对应值的key数组集合，unfoundKeys若不为nil，代表删除时在表格中没有找到这些key
+ *unfoundKeys 找不到对应值的key数组集合，unfoundKeys若不为nil，代表删除时在表格中没有找到这些key
  */
 - (void)deleteValuesForKeys:(nonnull NSArray<NSString *> *)keys inTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(NSArray<NSString *> * _Nullable unfoundKeys, NSError * _Nullable error))completionHandler;
 
@@ -135,7 +134,7 @@
  *获取表格大小
  *@param table 表格的名称
  *@param completionHandler 操作完成之后的block回调，回调会回到主线程
- *@param size 表格大小，单位为 B，如果表格不存在，size = 0
+ *size 表格大小，单位为 B，如果表格不存在，size = 0
  */
 - (void)sizeForTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(unsigned long long size))completionHandler;
 
@@ -143,15 +142,16 @@
  *删除一个表格
  *@param table 表格的名称
  *@param completionHandler 操作完成之后的block回调，回调会回到主线程
- *@param success YES表示删除成功，NO表示删除失败，如果表格不存在，success = NO
- *@param error success为YES时error为nil，success为NO可以通过error查看错误原因
+ *success YES表示删除成功，NO表示删除失败，如果表格不存在，success = NO
+ *error success为YES时error为nil，success为NO可以通过error查看错误原因
  */
 - (void)deleteTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(BOOL success, NSError * _Nullable error))completionHandler;
 
 /**
  *创建一个表格
  *@param table 被创建的表格的名称
- *@param success YES表示创建成功，NO表示创建失败
+ *@param completionHandler 操作完成之后的block回调，回调会回到主线程
+ *success YES表示创建成功，NO表示创建失败
  *写入数据时，如果表格不存在，会自动创建一个表格，所以不建议手动执行该方法
  */
 - (void)createTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(BOOL success))completionHandler;
