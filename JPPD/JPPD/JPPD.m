@@ -45,6 +45,8 @@ static void mainQueue(void(^block)()) {
         instance = [super init];
         self.queue = dispatch_queue_create("JPPD_data_operate_QUEUE", DISPATCH_QUEUE_CONCURRENT);
         instance.type = JPStorageDirectoryTypeCaches;
+        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"JPPD"];
+        [[NSFileManager defaultManager] createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     return instance;
 }
