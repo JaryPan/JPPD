@@ -81,6 +81,10 @@
  *@param completionHandler 操作完成之后的block回调，回调会回到主线程，value不为nil(error为nil)时代表读取成功
  */
 - (void)valueForKey:(nonnull NSString *)key inTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(id _Nullable value, NSError * _Nullable error))completionHandler;
+/**
+ *查看一条数据，非多线程处理
+ */
+- (nullable id)valueForKey:(nonnull NSString *)key inTable:(nonnull NSString *)table;
 
 /**
  *查看多条数据
@@ -90,6 +94,10 @@
  *unfoundKeys 找不到对应值的key数组集合，unfoundKeys若不为nil，代表存储的表格中没有找到这些key
  */
 - (void)valuesForKeys:(nonnull NSArray<NSString *> *)keys inTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(NSDictionary<NSString *, id> * _Nullable values, NSArray<NSString *> * _Nullable unfoundKeys, NSError * _Nullable error))completionHandler;
+/**
+ *查看多条数据，非多线程处理
+ */
+- (nullable NSDictionary<NSString *, id> *)valuesForKeys:(nonnull NSArray<NSString *> *)keys inTable:(nonnull NSString *)table;
 
 /**
  *查看一个表格中的所有数据
@@ -97,6 +105,10 @@
  *@param completionHandler 操作完成之后的block回调，回调会回到主线程，values不为nil(error为nil)时代表读取成功
  */
 - (void)allValuesInTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(NSDictionary<NSString *, id> * _Nullable values, NSError * _Nullable error))completionHandler;
+/**
+ *查看一个表格中的所有数据，非多线程处理
+ */
+- (nullable NSDictionary<NSString *, id> *)allValuesInTable:(nonnull NSString *)table;
 
 
 #pragma mark - ********** 删除数据 **********
@@ -137,6 +149,10 @@
  *size 表格大小，单位为 B，如果表格不存在，size = 0
  */
 - (void)sizeForTable:(nonnull NSString *)table completionHandler:(void(^ _Nullable)(unsigned long long size))completionHandler;
+/**
+ *获取表格大小，非多线程处理
+ */
+- (unsigned long long)sizeForTable:(nonnull NSString *)table;
 
 /**
  *删除一个表格

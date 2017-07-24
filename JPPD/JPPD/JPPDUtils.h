@@ -45,10 +45,18 @@ typedef NS_ENUM(NSInteger, JPErrorCode) {
 + (nullable NSError *)errorWithDomain:(nonnull NSString *)domain andCode:(JPErrorCode)code;
 
 /**
+ *数据归档
+ */
++ (nullable NSData *)ArchiveObject:(nonnull id)object forKey:(nonnull NSString *)key;
+/**
+ *数据反归档
+ */
++ (nullable id)unArchiveData:(nonnull id)data forKey:(nonnull NSString *)key;
+
+/**
  *将数据转换为可存储的类型(自动区分value的内容哪些需要归档处理)
  */
 + (nullable id)storableValue:(nonnull id)value withKey:(nonnull NSString *)key;
-
 /**
  *将数据转换为可读取的类型(自动将value中包含归档数据反归档)
  */

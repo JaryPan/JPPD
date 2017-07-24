@@ -35,20 +35,17 @@ static void mainQueue(void(^block)()) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[JPPD alloc] init];
+        [instance commonInit];
     });
     return instance;
 }
 // 重写init方法，保证单例地址不变
-- (instancetype)init
+- (void)commonInit
 {
-    if (!instance) {
-        instance = [super init];
-        self.queue = dispatch_queue_create("JPPD_data_operate_QUEUE", DISPATCH_QUEUE_CONCURRENT);
-        instance.type = JPStorageDirectoryTypeCaches;
-        NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"JPPD"];
-        [[NSFileManager defaultManager] createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    return instance;
+    self.queue = dispatch_queue_create("JPPD_data_operate_QUEUE", DISPATCH_QUEUE_CONCURRENT);
+    instance.type = JPStorageDirectoryTypeCaches;
+    NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"JPPD"];
+    [[NSFileManager defaultManager] createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
 
@@ -273,6 +270,44 @@ static void mainQueue(void(^block)()) {
         }
     });
 }
+- (id)valueForKey:(NSString *)key inTable:(NSString *)table
+{
+    // 暂停子线程
+    dispatch_suspend(self.queue);
+    
+    if (!key || key.length == 0 || !table || table.length == 0) {
+        // 恢复子线程
+        dispatch_resume(self.queue);
+        return nil;
+    }
+    
+    // 获取文件路径
+    NSString *tablePath = [self pathForTable:table];
+    // 判断文件是否存在
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tablePath]) {
+        // 拿到路径下的字典
+        NSMutableDictionary *tempDic = [self mutDictionaryForTable:table];
+        // 判断是否有对应的key
+        if ([[tempDic allKeys] containsObject:key]) {
+            // 数据反归档
+            id value = [JPPDUtils readableValue:tempDic[key] withKey:key];
+            // 恢复子线程
+            dispatch_resume(self.queue);
+            // 返回数据
+            return value;
+        } else {
+            // 存储的字典中并没有对应的值
+            // 恢复子线程
+            dispatch_resume(self.queue);
+            return nil;
+        }
+    } else {
+        // 表格不存在
+        // 恢复子线程
+        dispatch_resume(self.queue);
+        return nil;
+    }
+}
 
 #pragma mark - 查看多条数据
 - (void)valuesForKeys:(NSArray<NSString *> *)keys inTable:(NSString *)table completionHandler:(void (^)(NSDictionary<NSString *,id> * _Nullable, NSArray<NSString *> * _Nullable, NSError * _Nullable))completionHandler
@@ -341,6 +376,45 @@ static void mainQueue(void(^block)()) {
         }
     });
 }
+- (NSDictionary<NSString *,id> *)valuesForKeys:(NSArray<NSString *> *)keys inTable:(NSString *)table
+{
+    // 暂停子线程
+    dispatch_suspend(self.queue);
+    
+    if (!keys || keys.count == 0 || !table || table.length == 0) {
+        // 恢复子线程
+        dispatch_resume(self.queue);
+        return nil;
+    }
+    
+    // 获取文件路径
+    NSString *tablePath = [self pathForTable:table];
+    // 判断文件是否存在
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tablePath]) {
+        // 拿到路径下的字典
+        NSMutableDictionary *tempDic = [self mutDictionaryForTable:table];
+        // 将存在key的值装进准备好的字典中
+        NSMutableDictionary *returnDic = [NSMutableDictionary dictionary];
+        NSArray *tempDicKeys = [tempDic allKeys];
+        for (NSString *key in keys) {
+            if ([tempDicKeys containsObject:key]) {
+                id value = [JPPDUtils readableValue:tempDic[key] withKey:key];
+                if (value) {
+                    [returnDic setValue:value forKey:key];
+                }
+            }
+        }
+        
+        /// 恢复子线程
+        dispatch_resume(self.queue);
+        return returnDic;
+    } else {
+        // 表格不存在
+        // 恢复子线程
+        dispatch_resume(self.queue);
+        return nil;
+    }
+}
 
 #pragma mark - 查看一个表格中的所有数据
 - (void)allValuesInTable:(NSString *)table completionHandler:(void (^ _Nullable)(NSDictionary<NSString *,id> * _Nullable, NSError * _Nullable))completionHandler
@@ -389,6 +463,42 @@ static void mainQueue(void(^block)()) {
             }
         }
     });
+}
+- (NSDictionary<NSString *,id> *)allValuesInTable:(NSString *)table
+{
+    // 暂停子线程
+    dispatch_suspend(self.queue);
+    
+    if (!table || table.length == 0) {
+        // 恢复子线程
+        dispatch_resume(self.queue);
+        return nil;
+    }
+    
+    // 获取文件路径
+    NSString *tablePath = [self pathForTable:table];
+    // 判断文件是否存在
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tablePath]) {
+        // 拿到路径下的字典
+        NSMutableDictionary *tempDic = [self mutDictionaryForTable:table];
+        // 将存在key的值装进准备好的字典中
+        NSMutableDictionary *returnDic = [NSMutableDictionary dictionary];
+        for (NSString *key in [tempDic allKeys]) {
+            id value = [JPPDUtils readableValue:tempDic[key] withKey:key];
+            if (value) {
+                [returnDic setValue:value forKey:key];
+            }
+        }
+        
+        // 恢复子线程
+        dispatch_resume(self.queue);
+        return returnDic;
+    } else {
+        // 表格不存在
+        // 恢复子线程
+        dispatch_resume(self.queue);
+        return nil;
+    }
 }
 
 #pragma mark - ********** 删除数据 **********
@@ -557,6 +667,14 @@ static void mainQueue(void(^block)()) {
             });
         }
     });
+}
+- (unsigned long long)sizeForTable:(NSString *)table
+{
+    // 获取表格路径
+    NSString *tablePath = [self pathForTable:table];
+    // 获取表格大小
+    unsigned long long size = [[[NSFileManager defaultManager] attributesOfItemAtPath:tablePath error:nil] fileSize];
+    return size;
 }
 
 #pragma mark - 删除一个表格
